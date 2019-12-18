@@ -1,1 +1,2 @@
-/models/**/* filter=lfs diff=lfs merge=lfs -text
+/models/bclass_v1_006.pkl filter=lfs diff=lfs merge=lfs -text
+*.pkl filter=lfs diff=lfs merge=lfs -text
