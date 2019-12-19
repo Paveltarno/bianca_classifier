@@ -1,3 +1,16 @@
+button{
+  background-color: #0982d8;
+  cursor: pointer;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -26,4 +39,8 @@
   width: 50px;
   height: 50px;
   animation: spin 1s infinite;
+}
+
+.submitButton{
+  margin-top: 25px;
 }

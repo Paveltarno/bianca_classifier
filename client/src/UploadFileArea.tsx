@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import './UploadFileArea.css';
 import PlaceholderImage from './assets/dog_placeholder.png';
-
-type PreviewFile = File & { preview: string };
+import { PreviewFile } from './types/PreviewFile';
 
 const Placeholder = () => (
   <>
@@ -19,12 +18,16 @@ const Preview = ({ previewFile }: { previewFile: PreviewFile }) => (
   <img src={previewFile.preview} />
 );
 
-export const UploadFileArea = () => {
-  const [previewFile, setPreviewFile] = useState<PreviewFile>();
-
+export const UploadFileArea = ({
+  file,
+  onFileSelected,
+}: {
+  file?: PreviewFile;
+  onFileSelected: (file: PreviewFile) => any;
+}) => {
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: ([file, ...rest]) => {
-      setPreviewFile({
+      onFileSelected({
         ...file,
         preview: URL.createObjectURL(file),
       });
@@ -33,17 +36,12 @@ export const UploadFileArea = () => {
     maxSize: 1e7, // 10 MB
   });
 
-  useEffect(
-    () => () => previewFile && URL.revokeObjectURL(previewFile.preview),
-    [previewFile]
-  );
+  useEffect(() => () => file && URL.revokeObjectURL(file.preview), [file]);
 
   return (
     <div className="upload-file-area" {...getRootProps()}>
-      <>
-        <input {...getInputProps()} />
-        {previewFile ? <Preview previewFile={previewFile} /> : <Placeholder />}
-      </>
+      <input {...getInputProps()} />
+      {file ? <Preview previewFile={file} /> : <Placeholder />}
     </div>
   );
 };
