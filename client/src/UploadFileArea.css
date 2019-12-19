@@ -1,0 +1,17 @@
+.upload-file-area{
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+img{
+  width: 100%;
+}
+
+.upload-file-caption{
+  display: block;
+  position: absolute;
+  transform: rotate(-45deg);
+}
