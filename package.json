@@ -1,0 +1,21 @@
+{
+  "name": "bianca_classifier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client:dev": "cd ./client npm run dev && npm run start",
+    "build": "cd ./client && npm run build",
+    "server:start": "pipenv run python ./server/server.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Paveltarno/bianca_classifier.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Paveltarno/bianca_classifier/issues"
+  },
+  "homepage": "https://github.com/Paveltarno/bianca_classifier#readme"
+}

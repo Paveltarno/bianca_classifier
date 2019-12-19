@@ -7,11 +7,8 @@ MODEL_NAME = "bclass_v1_006.pkl"
 print(f"Loading learner with model {MODEL_NAME}")
 learner = load_learner(MODEL_PATH, MODEL_NAME)
 
-api = responder.API()
+api = responder.API(static_dir="./client/build", static_route="/")
 
-@api.route("/")
-def index(req, resp):
-  resp.text = "hello"
-
+api.add_route("/", static=True)
 
 api.run()
