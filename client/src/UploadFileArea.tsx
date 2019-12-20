@@ -26,11 +26,10 @@ export const UploadFileArea = ({
   onFileSelected: (file: PreviewFile) => any;
 }) => {
   const { getRootProps, getInputProps } = useDropzone({
-    onDrop: ([file, ...rest]) => {
-      onFileSelected({
-        ...file,
-        preview: URL.createObjectURL(file),
-      });
+    onDrop: ([file, ..._]) => {
+      onFileSelected(
+        Object.assign(file, { preview: URL.createObjectURL(file) })
+      );
     },
     accept: 'image/*',
     maxSize: 1e7, // 10 MB

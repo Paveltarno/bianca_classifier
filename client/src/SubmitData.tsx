@@ -9,7 +9,7 @@ export const SubmitData = ({
   onError,
 }: {
   url: string;
-  file: File;
+  file: any;
   onRequest: () => any;
   onError: (err: string | Error) => any;
   onResponse: (body: string) => any;
@@ -18,13 +18,12 @@ export const SubmitData = ({
     onRequest();
 
     try {
-      const response = await axios.post(url, file, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const formdata = new FormData();
+      formdata.append("file", file)
+      const response = await axios.post(url, formdata);
       onResponse(response.data);
     } catch (err) {
+      debugger;
       onError(err);
     }
   }, [file]);
