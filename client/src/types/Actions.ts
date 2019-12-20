@@ -1,0 +1,7 @@
+export enum ACTIONS {
+  FILE_SELECTED,
+  REQ_SUBMITTED,
+  REQ_ERR,
+  REQ_COMPLETED,
+  RESET,
+}

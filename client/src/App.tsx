@@ -5,69 +5,11 @@ import icon from './assets/mascot.gif';
 
 import './App.css';
 import { SubmitData } from './SubmitData';
-import { PreviewFile } from './types/PreviewFile';
+import { reducer, initialState } from './reducer';
+import { ACTIONS } from './types/Actions';
+import { APP_PHASE } from './types/AppPhase';
 
 const POST_URL = '/predict';
-
-enum ACTIONS {
-  FILE_SELECTED,
-  REQ_SUBMITTED,
-  REQ_ERR,
-  REQ_COMPLETED,
-  RESET,
-}
-
-enum APP_PHASE {
-  INIT,
-  LOADED,
-  REQUEST,
-  RESULT,
-  ERROR,
-}
-
-interface State {
-  selectedFile?: PreviewFile;
-  error?: string;
-  appPhase: APP_PHASE;
-}
-
-const initialState: State = {
-  selectedFile: undefined,
-  error: undefined,
-  appPhase: APP_PHASE.INIT,
-};
-
-const reducer: Reducer<State, any> = (state, action) => {
-  switch (action.type) {
-    case ACTIONS.FILE_SELECTED:
-      return {
-        ...state,
-        appPhase: APP_PHASE.LOADED,
-        selectedFile: action.selectedFile,
-      };
-    case ACTIONS.REQ_SUBMITTED:
-      return {
-        ...state,
-        appPhase: APP_PHASE.REQUEST,
-      };
-    case ACTIONS.REQ_ERR:
-      return {
-        ...state,
-        appPhase: APP_PHASE.ERROR,
-        error: action.body,
-      };
-    case ACTIONS.REQ_COMPLETED:
-      return {
-        ...state,
-        appPhase: APP_PHASE.RESULT,
-        result: action.body,
-      };
-    case ACTIONS.RESET:
-      return initialState
-    default:
-      return state;
-  }
-};
 
 const App: React.FC = () => {
   const [{ selectedFile, appPhase, error }, dispatch] = useReducer(
@@ -116,14 +58,20 @@ const App: React.FC = () => {
         />
       )}
 
-      {appPhase === APP_PHASE.ERROR && <><p className="error">{`Error: ${error}, please try again`}</p>
-          <button onClick={ () =>
-            dispatch({
-              type: ACTIONS.RESET
-            })
-          }>Retry</button>
-      </>}
-
+      {appPhase === APP_PHASE.ERROR && (
+        <>
+          <p className="error">{`Error: ${error}, please try again`}</p>
+          <button
+            onClick={() =>
+              dispatch({
+                type: ACTIONS.RESET,
+              })
+            }
+          >
+            Retry
+          </button>
+        </>
+      )}
     </div>
   );
 };
