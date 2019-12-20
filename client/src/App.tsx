@@ -8,11 +8,37 @@ import { SubmitData } from './SubmitData';
 import { reducer, initialState } from './reducer';
 import { ACTIONS } from './types/Actions';
 import { APP_PHASE } from './types/AppPhase';
+import { Prediction, PREDICTION_CLASS } from './types/Prediction';
 
 const POST_URL = '/predict';
 
+const RetryButton = ({ dispatch }) => (
+  <button
+    onClick={() =>
+      dispatch({
+        type: ACTIONS.RESET,
+      })
+    }
+  >
+    Retry
+  </button>
+);
+
+const formatPredictions = (predictions: Array<Prediction>) => {
+  const prediction = predictions[0];
+  console.log({prediction}, PREDICTION_CLASS.bianca)
+  switch (prediction[0]) {
+    case PREDICTION_CLASS.bianca:
+      return `That's Bianca!`;
+    case PREDICTION_CLASS.maltese:
+      return `That's not Bianca! It's some other Maltese`;
+    default:
+      return `That's not bianca...`;
+  }
+};
+
 const App: React.FC = () => {
-  const [{ selectedFile, appPhase, error }, dispatch] = useReducer(
+  const [{ selectedFile, appPhase, error, result }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -58,18 +84,19 @@ const App: React.FC = () => {
         />
       )}
 
+      {appPhase === APP_PHASE.REQUEST && <button disabled>Submitting</button>}
+
+      {appPhase === APP_PHASE.RESULT && (
+        <>
+          <div>{formatPredictions(result?.predictions as any)}</div>
+          <RetryButton dispatch={dispatch} />
+        </>
+      )}
+
       {appPhase === APP_PHASE.ERROR && (
         <>
           <p className="error">{`Error: ${error}, please try again`}</p>
-          <button
-            onClick={() =>
-              dispatch({
-                type: ACTIONS.RESET,
-              })
-            }
-          >
-            Retry
-          </button>
+          <RetryButton dispatch={dispatch} />
         </>
       )}
     </div>

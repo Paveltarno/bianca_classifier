@@ -2,10 +2,14 @@ import { Reducer } from "react";
 import { APP_PHASE } from "./types/AppPhase";
 import { PreviewFile } from "./types/PreviewFile";
 import { ACTIONS } from "./types/Actions";
+import { Prediction } from "./types/Prediction";
 
 interface State {
   selectedFile?: PreviewFile;
   error?: string;
+  result?: {
+    predictions: Array<Prediction>
+  },
   appPhase: APP_PHASE;
 }
 
@@ -13,6 +17,7 @@ export const initialState: State = {
   selectedFile: undefined,
   error: undefined,
   appPhase: APP_PHASE.INIT,
+  result: undefined,
 };
 
 export const reducer: Reducer<State, any> = (state, action) => {
