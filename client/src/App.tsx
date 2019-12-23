@@ -59,8 +59,9 @@ const App: React.FC = () => {
         }}
       />
 
-      {appPhase === APP_PHASE.LOADED && (
+      {(appPhase === APP_PHASE.INIT || appPhase === APP_PHASE.LOADED) && (
         <SubmitData
+          disabled={appPhase === APP_PHASE.INIT}
           url={POST_URL}
           file={selectedFile as File}
           onRequest={() =>
@@ -88,7 +89,9 @@ const App: React.FC = () => {
       {appPhase === APP_PHASE.RESULT && (
         <>
           <RetryButton dispatch={dispatch} />
-          <p className="result">{formatPredictions(result?.predictions as any)}</p>
+          <p className="result">
+            {formatPredictions(result?.predictions as any)}
+          </p>
         </>
       )}
 
@@ -98,6 +101,10 @@ const App: React.FC = () => {
           <p className="error">{`Error: ${error}, please try again`}</p>
         </>
       )}
+
+      <footer className="app-footer">
+        <a href="https://github.com/Paveltarno/bianca_classifier">source</a>
+      </footer>
     </div>
   );
 };

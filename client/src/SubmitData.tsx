@@ -7,9 +7,11 @@ export const SubmitData = ({
   onRequest,
   onResponse,
   onError,
+  disabled = false,
 }: {
   url: string;
   file: any;
+  disabled: boolean;
   onRequest: () => any;
   onError: (err: string | Error) => any;
   onResponse: (body: string) => any;
@@ -22,13 +24,12 @@ export const SubmitData = ({
       const response = await axios.post(url, formdata);
       onResponse(response.data);
     } catch (err) {
-      debugger;
       onError(err);
     }
   }, [file]);
-
+  
   return (
-    <button onClick={onClick} className="submitButton">
+    <button disabled={disabled} onClick={onClick} className="submitButton">
       ✨ Check ✨
     </button>
   );

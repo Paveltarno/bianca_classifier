@@ -7,7 +7,7 @@ import { PreviewFile } from './types/PreviewFile';
 
 const Placeholder = () => (
   <>
-    <img src={PlaceholderImage} />
+    <img className="preview-image" src={PlaceholderImage} />
     <h2 className="upload-file-caption">
       Drop or click to upload a doggy photo
     </h2>
@@ -15,7 +15,7 @@ const Placeholder = () => (
 );
 
 const Preview = ({ previewFile }: { previewFile: PreviewFile }) => (
-  <img src={previewFile.preview} />
+  <img className="preview-image" src={previewFile.preview} />
 );
 
 export const UploadFileArea = ({
