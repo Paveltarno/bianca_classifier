@@ -10,7 +10,7 @@
     "install": "cd ./client && npm install",
     "client:dev": "cd ./client && npm run dev && npm run start",
     "build": "cd ./client && npm run build",
-    "server:start": "pipenv run python ./server/server.py"
+    "start": "pipenv run python ./server/server.py"
   },
   "repository": {
     "type": "git",
