@@ -1,10 +1,14 @@
 {
   "name": "bianca_classifier",
+  "engines": {
+    "node": "13.x"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client:dev": "cd ./client npm run dev && npm run start",
+    "install": "cd ./client && npm install",
+    "client:dev": "cd ./client && npm run dev && npm run start",
     "build": "cd ./client && npm run build",
     "server:start": "pipenv run python ./server/server.py"
   },
