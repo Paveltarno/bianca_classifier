@@ -26,7 +26,6 @@ const RetryButton = ({ dispatch }) => (
 
 const formatPredictions = (predictions: Array<Prediction>) => {
   const prediction = predictions[0];
-  console.log({prediction}, PREDICTION_CLASS.bianca)
   switch (prediction[0]) {
     case PREDICTION_CLASS.bianca:
       return `That's Bianca!`;
@@ -44,10 +43,10 @@ const App: React.FC = () => {
   );
 
   return (
-    <div className="App">
-      <header className="AppHeader">
+    <div className="app">
+      <header className="app-header">
         <h1>Is this.. Bianca?</h1>
-        <img className="icon" src={icon}></img>
+        <img className="spinning-icon" src={icon}></img>
       </header>
 
       <UploadFileArea
@@ -88,15 +87,15 @@ const App: React.FC = () => {
 
       {appPhase === APP_PHASE.RESULT && (
         <>
-          <div>{formatPredictions(result?.predictions as any)}</div>
           <RetryButton dispatch={dispatch} />
+          <p className="result">{formatPredictions(result?.predictions as any)}</p>
         </>
       )}
 
       {appPhase === APP_PHASE.ERROR && (
         <>
-          <p className="error">{`Error: ${error}, please try again`}</p>
           <RetryButton dispatch={dispatch} />
+          <p className="error">{`Error: ${error}, please try again`}</p>
         </>
       )}
     </div>

@@ -16,7 +16,6 @@ export const SubmitData = ({
 }) => {
   const onClick = useCallback(async () => {
     onRequest();
-
     try {
       const formdata = new FormData();
       formdata.append("file", file)
