@@ -2,6 +2,9 @@ import React, { useReducer, Reducer } from 'react';
 import { UploadFileArea } from './UploadFileArea';
 
 import icon from './assets/mascot.gif';
+import example1 from './assets/bianca_1.jpeg';
+import example2 from './assets/bianca_2.jpeg';
+import example3 from './assets/bianca_3.jpeg';
 
 import './App.css';
 import { SubmitData } from './SubmitData';
@@ -103,6 +106,12 @@ const App: React.FC = () => {
       )}
 
       <footer className="app-footer">
+        <section>
+          <span>Download test images </span>
+          <a download href={example1}>[1]</a>
+          <a download href={example2}>[2]</a>
+          <a download href={example3}>[3]</a>
+        </section>
         <a href="https://github.com/Paveltarno/bianca_classifier">source</a>
       </footer>
     </div>

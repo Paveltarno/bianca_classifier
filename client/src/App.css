@@ -40,6 +40,8 @@
 
 .app-footer{
   padding-bottom: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-footer a{
