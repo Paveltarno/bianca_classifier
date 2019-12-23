@@ -1,4 +1,4 @@
-import React, { useReducer, Reducer } from 'react';
+import React, { useReducer } from 'react';
 import { UploadFileArea } from './UploadFileArea';
 
 import icon from './assets/mascot.gif';

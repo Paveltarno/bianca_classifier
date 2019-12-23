@@ -26,7 +26,7 @@ export const SubmitData = ({
     } catch (err) {
       onError(err);
     }
-  }, [file]);
+  }, []);
   
   return (
     <button disabled={disabled} onClick={onClick} className="submitButton">
